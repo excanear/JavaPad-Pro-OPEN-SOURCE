@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+if command -v gradle >/dev/null 2>&1; then
+  gradle "$@"
+else
+  echo "Gradle não encontrado. Para criar o wrapper execute: gradle wrapper" >&2
+  echo "Ou instale o Gradle (https://gradle.org/install)" >&2
+  exit 1
+fi
