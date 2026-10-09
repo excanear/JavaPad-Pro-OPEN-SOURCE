@@ -4,7 +4,12 @@ setlocal enabledelayedexpansion
 
 if not exist out mkdir out
 if exist sources.txt del /q sources.txt
-for /r %%f in (*.java) do @echo %%f >> sources.txt
+REM No argfile (@sources.txt) do javac, '\' e escape e espacos separam args.
+REM Entao escrevemos cada caminho entre aspas e com barras normais '/'.
+for /r %%f in (*.java) do (
+  set "JP_SRC=%%f"
+  echo "!JP_SRC:\=/!">> sources.txt
+)
 
 javac -d out @sources.txt
 if ERRORLEVEL 1 (
